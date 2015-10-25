@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>xxiieao&#39;s blog</title>
+    <description>这里主要是我学习算法的笔记，以及一些杂谈
+</description>
+    <link>http://xxiieao.github.io/</link>
+    <atom:link href="http://xxiieao.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 25 Oct 2015 20:15:17 +0800</pubDate>
+    <lastBuildDate>Sun, 25 Oct 2015 20:15:17 +0800</lastBuildDate>
+    <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>welcome to xxiieao</title>
+        <description>&lt;p&gt;值得纪念的第一步&lt;/p&gt;
+</description>
+        <pubDate>Mon, 26 Oct 2015 03:16:22 +0800</pubDate>
+        <link>http://xxiieao.github.io/other/2015/10/26/welcome-to-xxiieao.html</link>
+        <guid isPermaLink="true">http://xxiieao.github.io/other/2015/10/26/welcome-to-xxiieao.html</guid>
+        
+        
+        <category>other</category>
+        
+      </item>
+    
+      <item>
+        <title>Aprirori</title>
+        <description>&lt;h1 id=&quot;apriori&quot;&gt;Apriori&lt;/h1&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#apriori&quot; id=&quot;markdown-toc-apriori&quot;&gt;Apriori&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#overview&quot; id=&quot;markdown-toc-overview&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#base-theory-of-apriori&quot; id=&quot;markdown-toc-base-theory-of-apriori&quot;&gt;Base Theory of Apriori&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#steps-of-apriori&quot; id=&quot;markdown-toc-steps-of-apriori&quot;&gt;Steps of Apriori&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#step-1&quot; id=&quot;markdown-toc-step-1&quot;&gt;Step 1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#step-2&quot; id=&quot;markdown-toc-step-2&quot;&gt;Step 2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;overview&quot;&gt;Overview&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DataMining&lt;/li&gt;
+  &lt;li&gt;Frequent item set&lt;/li&gt;
+  &lt;li&gt;Bottom up approach&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;base-theory-of-apriori&quot;&gt;Base Theory of Apriori&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;If one item-set is &lt;em&gt;FREQUENT&lt;/em&gt;, whose subsets are all &lt;em&gt;FREQUENT&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;If an item-set is &lt;em&gt;INFREQUENT&lt;/em&gt;, none of the item-sets contains which wouldn’t be &lt;em&gt;Frequent&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;steps-of-apriori&quot;&gt;Steps of Apriori&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;step1 counting and filtering candidate&lt;/li&gt;
+  &lt;li&gt;step2 candidate generation&lt;/li&gt;
+  &lt;li&gt;step3 return to step1, unless only one candidate left&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;step-1&quot;&gt;Step 1&lt;/h1&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;order_id&lt;/th&gt;
+      &lt;th&gt;item&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;b&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;c&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;b&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;e&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;f&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;counting&lt;br /&gt;
+b: 2, c: 1, e: 1&lt;/p&gt;
+
+  &lt;p&gt;filtering&lt;br /&gt;
+b: 2&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;step-2&quot;&gt;Step 2&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Single item scenario&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;items from step 1&lt;br /&gt;
+a: 10, b: 5, c: 8, e: 7&lt;/p&gt;
+
+  &lt;p&gt;generate candidate from a, b, c, e&lt;br /&gt;
+[ab, ac, ae, bc, be, ce]&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Multi item scenario&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;items from step 1&lt;br /&gt;
+abc: 4, abd: 5, acd: 3&lt;/p&gt;
+
+  &lt;p&gt;generate candidate from abc, acd, ace&lt;br /&gt;
+[acde]&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Mon, 26 Oct 2015 03:16:22 +0800</pubDate>
+        <link>http://xxiieao.github.io/algorithm/2015/10/26/Apriori.html</link>
+        <guid isPermaLink="true">http://xxiieao.github.io/algorithm/2015/10/26/Apriori.html</guid>
+        
+        
+        <category>algorithm</category>
+        
+      </item>
+    
+  </channel>
+</rss>
