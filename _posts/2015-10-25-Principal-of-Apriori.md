@@ -1,11 +1,10 @@
 ---
 layout: post
-title:  "Aprirori"
-date:   2015-10-25 19:16:22
+title:  "Principal of Aprirori"
+date:   2015-10-25 20:16:22
 categories: Algorithm
 ---
 
-# Apriori
 * TOC
 {:toc}
 

@@ -19,6 +19,11 @@ body {
   background-color: #fdfdfd;
   -webkit-text-size-adjust: 100%; }
 
+p {
+  text-indent: 2em;
+  padding: 0px;
+  margin: 0px; }
+
 /**
  * Set `margin-bottom` to maintain vertical rhythm
  */
@@ -54,6 +59,23 @@ li > ul,
 li > ol {
   margin-bottom: 0; }
 
+/**
+ * Table
+ */
+table {
+  margin: auto;
+  border-collapse: collapse; }
+
+thead, tbody {
+  border: 1px solid black; }
+
+tr {
+  background: white; }
+
+tr:nth-child(2n) {
+  background: #ccc; }
+
+/* tr{ background-color: expression((this.sectionRowIndex % 2 == 0) ? "white" : "grey" );} */
 /**
  * Headings
  */

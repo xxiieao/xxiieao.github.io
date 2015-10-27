@@ -6,28 +6,145 @@
 </description>
     <link>http://xxiieao.github.io/</link>
     <atom:link href="http://xxiieao.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 25 Oct 2015 20:15:17 +0800</pubDate>
-    <lastBuildDate>Sun, 25 Oct 2015 20:15:17 +0800</lastBuildDate>
+    <pubDate>Tue, 27 Oct 2015 14:53:58 +0800</pubDate>
+    <lastBuildDate>Tue, 27 Oct 2015 14:53:58 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
-        <title>welcome to xxiieao</title>
-        <description>&lt;p&gt;值得纪念的第一步&lt;/p&gt;
+        <title>ID3</title>
+        <description>&lt;p&gt;决策树是数据挖掘中非常重要的组成部分，不过它并不属于机器学习的范畴。这里面的原因和主导决策数的基本思想——贪心算法有关系，在每一次分类都稳稳当当地走出最好一部的指导思想下，当然不需要学习。&lt;/p&gt;
+
+&lt;p&gt;话题有点远，决策树最典型的算法代表有三种ID3，C4.5，CART。其中ID3和C4.5都是基于信息熵计算的，而CART是基于Gini指数计算的。C4.5是ID3的改良算法，能处理连续变量也就是能分类也能回归，而ID3只能处理分类变量。&lt;/p&gt;
+
+&lt;p&gt;这次我们先看看简单的ID3是如何工作的。开始前我们先回忆一下信息熵的意义——熵值越大信息越不确定。然后假设商店拥有以下数据，用户性别、手机系统类型和购买记录。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;ID&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;sex&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;mobile_os&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;purchase_record&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;male&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;android&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;male&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;ios&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;male&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;ios&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;male&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;android&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;5&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;male&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;android&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;6&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;female&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;android&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;7&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;female&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;ios&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;8&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;female&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;ios&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;9&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;female&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;ios&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;10&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;female&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;android&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;然后希望按照这些数据构造一棵回归树来分类用户购买行为，首先需要解决的问题是sex和mobilebile_os谁来当根结点。&lt;/p&gt;
+
+&lt;p&gt;先来看购买数据purchase_record本身的熵值，yes有6条记录，no有4条&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;H_{purchase}=-0.6*log_2{0.6}-0.4*log_2{0.4}=0.971&lt;/script&gt;
+
+&lt;p&gt;然后再来看sex分类下male这个小组purchase_record的熵值{即sex=male条件下purchase_record的条件熵}，yes记录2条，no有3条&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;H_{purchase|sex=male}=-0.4*log_2{0.4}-0.6*log_2{0.6}=0.971&lt;/script&gt;
+
+&lt;p&gt;同样分类female下purchase_record的条件熵值&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;H_{purchase|sex=female}=-0.8*log_2{0.8}-0.2*log2{0.2}=0.722&lt;/script&gt;
+
+&lt;p&gt;那么purchase_record关于sex的条件熵就等于male和female各自的概率乘以条件熵之和。&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;H_{purchase|sex}=0.5*0.971+0.5*0.722=0.846&lt;/script&gt;
+
+&lt;p&gt;同样可以算得&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;H_{purchase|mobile\_os}=0.722*0.5+0*0.5=0.361&lt;/script&gt;
+
+&lt;p&gt;显然在第一步分类中，mobile_os这一数据让purchase_record变得更有顺序了。在ID3的实际应用中，使用的是信息增益。在上面的例子，sex的信息增益度为&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;H_{purchase}-H_{purchase|sex}=0.971-0.846=0.025&lt;/script&gt;
+
+&lt;p&gt;而mobiles_os=0.610。&lt;/p&gt;
+
+&lt;p&gt;那么我们可以决定第一个分类变量选择的就是mobile_os。第二次分类的变量用同样的方法决定，不过在例子中由于只有两个变量，可以想象我们可以得到如下分类树。&lt;/p&gt;
+
+&lt;script src=&quot;http://cdn.bootcss.com/mermaid/0.5.4/mermaid.js&quot;&gt;&lt;/script&gt;
+&lt;div class=&quot;mermaid&quot;&gt;
+graph TD;
+    start(user)--&amp;gt;mobile_os{ios?};
+    mobile_os--&amp;gt; |yes| result1[purchase=yes];
+    mobile_os--&amp;gt; |no| sex{male?};
+    sex--&amp;gt; |yes| result2[purchase=no];
+    sex--&amp;gt; |no| result3[50%purchase=no,50%purchase=yes];
+&lt;/div&gt;
+
+&lt;p&gt;第一个mobile_os==ios的分支之所以没再继续按sex分类是因为该组的purchase都是yes，熵值为0没有必要再分。在实际应用中为了防止过度分类，常常会设定增益度阈值，低于该阈值则不再划分。&lt;/p&gt;
 </description>
-        <pubDate>Mon, 26 Oct 2015 03:16:22 +0800</pubDate>
-        <link>http://xxiieao.github.io/other/2015/10/26/welcome-to-xxiieao.html</link>
-        <guid isPermaLink="true">http://xxiieao.github.io/other/2015/10/26/welcome-to-xxiieao.html</guid>
+        <pubDate>Tue, 27 Oct 2015 04:40:22 +0800</pubDate>
+        <link>http://xxiieao.github.io/algorithm/2015/10/27/ID3.html</link>
+        <guid isPermaLink="true">http://xxiieao.github.io/algorithm/2015/10/27/ID3.html</guid>
         
         
-        <category>other</category>
+        <category>algorithm</category>
         
       </item>
     
       <item>
-        <title>Aprirori</title>
-        <description>&lt;h1 id=&quot;apriori&quot;&gt;Apriori&lt;/h1&gt;
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#apriori&quot; id=&quot;markdown-toc-apriori&quot;&gt;Apriori&lt;/a&gt;&lt;/li&gt;
+        <title>Principal of Aprirori</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#overview&quot; id=&quot;markdown-toc-overview&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#base-theory-of-apriori&quot; id=&quot;markdown-toc-base-theory-of-apriori&quot;&gt;Base Theory of Apriori&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#steps-of-apriori&quot; id=&quot;markdown-toc-steps-of-apriori&quot;&gt;Steps of Apriori&lt;/a&gt;&lt;/li&gt;
@@ -135,12 +252,25 @@ abc: 4, abd: 5, acd: 3&lt;/p&gt;
 [acde]&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
-        <pubDate>Mon, 26 Oct 2015 03:16:22 +0800</pubDate>
-        <link>http://xxiieao.github.io/algorithm/2015/10/26/Apriori.html</link>
-        <guid isPermaLink="true">http://xxiieao.github.io/algorithm/2015/10/26/Apriori.html</guid>
+        <pubDate>Mon, 26 Oct 2015 04:16:22 +0800</pubDate>
+        <link>http://xxiieao.github.io/algorithm/2015/10/26/Principal-of-Apriori.html</link>
+        <guid isPermaLink="true">http://xxiieao.github.io/algorithm/2015/10/26/Principal-of-Apriori.html</guid>
         
         
         <category>algorithm</category>
+        
+      </item>
+    
+      <item>
+        <title>Welcome to xxiieao</title>
+        <description>&lt;p&gt;值得纪念的第一步&lt;/p&gt;
+</description>
+        <pubDate>Mon, 26 Oct 2015 03:16:22 +0800</pubDate>
+        <link>http://xxiieao.github.io/other/2015/10/26/Welcome-to-xxiieao.html</link>
+        <guid isPermaLink="true">http://xxiieao.github.io/other/2015/10/26/Welcome-to-xxiieao.html</guid>
+        
+        
+        <category>other</category>
         
       </item>
     
