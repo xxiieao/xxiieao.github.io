@@ -6,8 +6,8 @@
 </description>
     <link>http://xxiieao.github.io/</link>
     <atom:link href="http://xxiieao.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 27 Oct 2015 14:53:58 +0800</pubDate>
-    <lastBuildDate>Tue, 27 Oct 2015 14:53:58 +0800</lastBuildDate>
+    <pubDate>Tue, 27 Oct 2015 19:41:19 +0800</pubDate>
+    <lastBuildDate>Tue, 27 Oct 2015 19:41:19 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -122,6 +122,7 @@
 &lt;p&gt;那么我们可以决定第一个分类变量选择的就是mobile_os。第二次分类的变量用同样的方法决定，不过在例子中由于只有两个变量，可以想象我们可以得到如下分类树。&lt;/p&gt;
 
 &lt;script src=&quot;http://cdn.bootcss.com/mermaid/0.5.4/mermaid.js&quot;&gt;&lt;/script&gt;
+
 &lt;div class=&quot;mermaid&quot;&gt;
 graph TD;
     start(user)--&amp;gt;mobile_os{ios?};
