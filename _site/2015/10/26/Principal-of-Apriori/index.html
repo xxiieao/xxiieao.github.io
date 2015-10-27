@@ -11,7 +11,7 @@
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/mermaid.css">
-  <link rel="canonical" href="http://xxiieao.github.io/algorithm/2015/10/26/Principal-of-Apriori.html">
+  <link rel="canonical" href="http://xxiieao.github.io/2015/10/26/Principal-of-Apriori/">
 <!--   <link rel="alternate" type="application/rss+xml" title="xxiieao's blog" href="http://xxiieao.github.io/feed.xml" /> -->
 </head>
 
@@ -63,7 +63,7 @@
 
   <header class="post-header">
     <h1 class="post-title">Principal of Aprirori</h1>
-    <p class="post-meta">Oct 26, 2015</p>
+    <p class="post-meta">2015-10-26 04:16:22</p>
   </header>
 
   <article class="post-content">
@@ -81,7 +81,7 @@
 
 <ul>
   <li>DataMining</li>
-  <li>Frequent item set</li>
+  <li>Frequent item-set</li>
   <li>Bottom up approach</li>
 </ul>
 
@@ -91,7 +91,7 @@
 
 <ul>
   <li>If one item-set is <em>FREQUENT</em>, whose subsets are all <em>FREQUENT</em>.</li>
-  <li>If an item-set is <em>INFREQUENT</em>, none of the item-sets contains which wouldn’t be <em>Frequent</em>.</li>
+  <li>If an item-set is <em>INFREQUENT</em>, none of the item-sets contains that would be <em>Frequent</em>.</li>
 </ul>
 
 <hr />
@@ -101,7 +101,7 @@
 <ol>
   <li>step1 counting and filtering candidate</li>
   <li>step2 candidate generation</li>
-  <li>step3 return to step1, unless only one candidate left</li>
+  <li>step3 return to step1, unless no or only one candidate left</li>
 </ol>
 
 <hr />
@@ -111,40 +111,42 @@
 <table>
   <thead>
     <tr>
-      <th>order_id</th>
-      <th>item</th>
+      <th style="text-align: center">order_id</th>
+      <th style="text-align: center">item_name</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>1</td>
-      <td>b</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">b</td>
     </tr>
     <tr>
-      <td>1</td>
-      <td>c</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">c</td>
     </tr>
     <tr>
-      <td>2</td>
-      <td>b</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">b</td>
     </tr>
     <tr>
-      <td>2</td>
-      <td>e</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">e</td>
     </tr>
     <tr>
-      <td>3</td>
-      <td>f</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">f</td>
     </tr>
   </tbody>
 </table>
 
 <blockquote>
-  <p>counting<br />
-b: 2, c: 1, e: 1</p>
+  <p>counting</p>
 
-  <p>filtering<br />
-b: 2</p>
+  <p>b: 2, c: 1, e: 1, f: 1</p>
+
+  <p>filted result</p>
+
+  <p>b: 2</p>
 </blockquote>
 
 <hr />
@@ -156,11 +158,13 @@ b: 2</p>
 </ul>
 
 <blockquote>
-  <p>items from step 1<br />
-a: 10, b: 5, c: 8, e: 7</p>
+  <p>items from step 1</p>
 
-  <p>generate candidate from a, b, c, e<br />
-[ab, ac, ae, bc, be, ce]</p>
+  <p>a: 10, b: 5, c: 8, e: 7</p>
+
+  <p>generate candidate from a, b, c, e</p>
+
+  <p>[ab, ac, ae, bc, be, ce]</p>
 </blockquote>
 
 <ul>
@@ -168,11 +172,13 @@ a: 10, b: 5, c: 8, e: 7</p>
 </ul>
 
 <blockquote>
-  <p>items from step 1<br />
-abc: 4, abd: 5, acd: 3</p>
+  <p>items from step 1</p>
 
-  <p>generate candidate from abc, acd, ace<br />
-[acde]</p>
+  <p>abc: 4, abd: 5, acd: 3</p>
+
+  <p>generate candidate from abc, acd, ace</p>
+
+  <p>[acde]</p>
 </blockquote>
 
   </article>

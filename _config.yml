@@ -7,16 +7,18 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://xxiieao.github.io" # the base hostname & protocol for your site
 twitter_username: 
 github_username:  xxiieao
+permalink: /:year/:month/:day/:title/
 
 gems: [jekyll-mermaid]
 
 # Build settings
 markdown: kramdown
-kramdown:
-  input:  GFM
-  use_coderay: true
+# kramdown:
+#   input:  GFM
+#   use_coderay: true
 
 mermaid:
   src: 'http://cdn.bootcss.com/mermaid/0.5.4/mermaid.js'
 
 paginate: 10
+paginate_path: "page:num"
