@@ -3,6 +3,7 @@ layout: post
 title:  "Principal of Aprirori"
 date:   2015-10-25 20:16:22
 categories: Algorithm
+author: xxiieao
 ---
 
 * TOC

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>xxiieao&#39;s blog</title>
-    <description>这里主要是我学习算法的笔记，以及一些杂谈
-</description>
+    <title>Chorus</title>
+    <description>这里主要是我学习算法的笔记，以及一些杂谈</description>
     <link>http://xxiieao.github.io/</link>
     <atom:link href="http://xxiieao.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 27 Oct 2015 20:51:35 +0800</pubDate>
-    <lastBuildDate>Tue, 27 Oct 2015 20:51:35 +0800</lastBuildDate>
+    <pubDate>Wed, 28 Oct 2015 14:42:31 +0800</pubDate>
+    <lastBuildDate>Wed, 28 Oct 2015 14:42:31 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
