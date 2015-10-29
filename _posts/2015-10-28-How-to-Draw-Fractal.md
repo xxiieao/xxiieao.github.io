@@ -14,9 +14,9 @@ author: xxiieao
 
 下面是当$$c = 0.45 - 0.1428i$$时画出来的图片
 
-![picture](/public/pics/fractal1.jpg)
-![picture](/public/pics/fractal2.jpg)
-![picture](/public/pics/fractal3.jpg)
+![picture](http://ww2.sinaimg.cn/mw690/6daafd01gw1exia8nn971j20ad09c74e.jpg)
+![picture](http://ww1.sinaimg.cn/mw690/6daafd01gw1exia8o83rnj20ad09c3ym.jpg)
+![picture](http://ww4.sinaimg.cn/mw690/6daafd01gw1exia8osu7cj20ad09caa5.jpg)
 
 下面附上R的代码
 
