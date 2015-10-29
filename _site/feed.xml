@@ -2,12 +2,81 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Chorus</title>
-    <description>这里主要是我学习算法的笔记，以及一些杂谈</description>
+    <description>这里主要是我学习的笔记，以及一些杂谈</description>
     <link>http://xxiieao.github.io/</link>
     <atom:link href="http://xxiieao.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 28 Oct 2015 14:42:31 +0800</pubDate>
-    <lastBuildDate>Wed, 28 Oct 2015 14:42:31 +0800</lastBuildDate>
+    <pubDate>Thu, 29 Oct 2015 19:20:36 +0800</pubDate>
+    <lastBuildDate>Thu, 29 Oct 2015 19:20:36 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>How to Draw Fractal</title>
+        <description>&lt;p&gt;先介绍一下分形吧。百度上面关于分形的定义比较罗嗦，其实分形最重要的特征就是自相似，说白了就是局部放大之后会和整体非常相似。以前在网上看到过许多分形的图片，觉得非常漂亮，但是也一直没有动手画过。昨天看了一些关于分形生长的论文，里面提到反复迭代函数&lt;script type=&quot;math/tex&quot;&gt;f(z) = z^2 + c&lt;/script&gt;就可以画出各种各样的分形。这个方程如此简单，让我觉得可以很轻松地在R中实现。不过很快我就犯了错误，看到论文的论述我的第一反应是&lt;script type=&quot;math/tex&quot;&gt;f(z)&lt;/script&gt;的轨迹图是个分形。不过R上实践的结果根本不是分形。于是到matrix67的博客上看到了关于如何使用&lt;script type=&quot;math/tex&quot;&gt;f(z) = z^2 + c&lt;/script&gt;画分形的解释。&lt;/p&gt;
+
+&lt;p&gt;首先需要明确的第一点变量&lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;是复数，当然&lt;script type=&quot;math/tex&quot;&gt;c&lt;/script&gt;也是复数。&lt;/p&gt;
+
+&lt;p&gt;其次构成分形的不是函数&lt;script type=&quot;math/tex&quot;&gt;f(z) = z^2 + c&lt;/script&gt;的轨迹，而是&lt;script type=&quot;math/tex&quot;&gt;f(z)&lt;/script&gt;的发散速度。&lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;是不同数值时，即初始自变量不同&lt;script type=&quot;math/tex&quot;&gt;f(z)&lt;/script&gt;发散的速度是不同的。而在计算模拟中，为了方便处理，一般定义为超过某个阈值需要的迭代计算次数。例如当&lt;script type=&quot;math/tex&quot;&gt;z = 0.6 + 0.5i&lt;/script&gt;，&lt;script type=&quot;math/tex&quot;&gt;c = 1 + 0.5i&lt;/script&gt;时，阈值为2时，需要迭代两次，那么这个2就作为&lt;script type=&quot;math/tex&quot;&gt;x = 0.6&lt;/script&gt;和&lt;script type=&quot;math/tex&quot;&gt;y =0.5&lt;/script&gt;这个点发散速度。对某个区域的点均进行计算再根据迭代次数进行计算就可以得到一张分形图。下面是R的代码，有兴趣的同学可以试一下&lt;/p&gt;
+
+&lt;p&gt;下面是当&lt;script type=&quot;math/tex&quot;&gt;c = 0.45 - 0.1428i&lt;/script&gt;时画出来的图片&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pics/fractal1.jpg&quot; alt=&quot;picture&quot; /&gt;
+&lt;img src=&quot;/public/pics/fractal2.jpg&quot; alt=&quot;picture&quot; /&gt;
+&lt;img src=&quot;/public/pics/fractal3.jpg&quot; alt=&quot;picture&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;下面附上R的代码&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; complex_matrix_int &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;interval&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; x_start&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; x_end&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y_start&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y_end&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;#输入间隔，x轴和y轴的起始坐标&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;#输出一个由x坐标和y坐标构成的复数矩阵&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;   x_distance &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; x_end &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; x_start
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;   y_distance &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; y_end &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; y_start
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;   xaxis &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x_start&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; x_end&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; interval&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;   yaxis &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y_start&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y_end&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; interval&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;   x_rep_times &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;yaxis&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;   y_rep_times &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;xaxis&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;   &lt;span class=&quot;kt&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;complex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;real &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;rep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;xaxis&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; x_rep_times&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;                  imaginary &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;rep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;yaxis&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; each &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; y_rep_times&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;                  x_rep_times&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y_rep_times&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; byrow &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; iterator &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;complex_matrix&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; constant&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;#输入一个由x坐标和y坐标构成的复数矩阵和常数c&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;#输出一个与输入对应的矩阵，每个元素代表对应坐标超过2时的迭代次数&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt;   res &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nrow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;complex_matrix&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;ncol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;complex_matrix&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt;   &lt;span class=&quot;kr&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;i &lt;span class=&quot;kr&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#因为有的点是收敛而非发散永远不会超过2因此设置迭代上限为100次&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt;     res &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; res &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;as.numeric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;complex_matrix&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt;     complex_matrix &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; complex_matrix&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; constant
+&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;23&lt;/span&gt;   res
+&lt;span class=&quot;lineno&quot;&gt;24&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;25&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;26&lt;/span&gt; fractal_plot &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;interval &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.005&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;27&lt;/span&gt;                         x_start &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; x_end &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;28&lt;/span&gt;                         y_start &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y_end &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;29&lt;/span&gt;                         constant &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.45-0.1428i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;30&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;#调用complex_matrix_int和iterator&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;31&lt;/span&gt;   complex_matrix &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; complex_matrix_int&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;interval&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; x_start&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; x_end&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y_start&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y_end&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;32&lt;/span&gt;   iter_times_matrix &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; iterator&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;complex_matrix&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; constant&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;33&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;#并对迭代次数的矩阵进行染色&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;34&lt;/span&gt;   filled.contour&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x_start&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; x_end&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; interval&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;35&lt;/span&gt;                  y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;y_start&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y_end&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; interval&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;36&lt;/span&gt;                  z &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;iter_times_matrix&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;37&lt;/span&gt;                  col &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; rainbow&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;121&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;38&lt;/span&gt;                  levels &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;pretty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;101&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;39&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;40&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;41&lt;/span&gt; fractal_plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.005&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.45-0.1428i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#第一张图&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;42&lt;/span&gt; fractal_plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.001&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-0.6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.45-0.1428i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#第二张图&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;43&lt;/span&gt; fractal_plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.00025&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-0.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.45-0.1428i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#第三张图&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+        <pubDate>Thu, 29 Oct 2015 05:10:02 +0800</pubDate>
+        <link>http://xxiieao.github.io/2015/10/29/How-to-Draw-Fractal/</link>
+        <guid isPermaLink="true">http://xxiieao.github.io/2015/10/29/How-to-Draw-Fractal/</guid>
+        
+        
+        <category>math</category>
+        
+      </item>
     
       <item>
         <title>ID3</title>
@@ -120,8 +189,6 @@
 
 &lt;p&gt;那么我们可以决定第一个分类变量选择的就是mobile_os。第二次分类的变量用同样的方法决定，不过在例子中由于只有两个变量，可以想象我们可以得到如下分类树。&lt;/p&gt;
 
-&lt;script src=&quot;http://cdn.bootcss.com/mermaid/0.5.4/mermaid.js&quot;&gt;&lt;/script&gt;
-
 &lt;div class=&quot;mermaid&quot;&gt;
 graph TD;
     start(user)--&amp;gt;mobile_os{ios?};
@@ -131,7 +198,7 @@ graph TD;
     sex--&amp;gt; |no| result3[50%purchase=no,50%purchase=yes];
 &lt;/div&gt;
 
-&lt;p&gt;第一个mobile_os==ios的分支之所以没再继续按sex分类是因为该组的purchase都是yes，熵值为0没有必要再分。在实际应用中为了防止过度分类，常常会设定增益度阈值，低于该阈值则不再划分。&lt;/p&gt;
+&lt;p&gt;第一个mobile_os=ios的分支之所以没再继续按sex分类是因为该组的purchase都是yes，熵值为0没有必要再分。在实际应用中为了防止过度分类，常常会设定增益度阈值，低于该阈值则不再划分。&lt;/p&gt;
 </description>
         <pubDate>Tue, 27 Oct 2015 04:40:22 +0800</pubDate>
         <link>http://xxiieao.github.io/2015/10/27/ID3/</link>

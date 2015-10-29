@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      How to Draw Fractal &middot; Chorus
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/mermaid.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="public/bass_big.png">
+                                 <link rel="shortcut icon" href="public/bass_small.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="">
+          Chorus
+        </a>
+      </h1>
+      <p class="lead">这里主要是我学习的笔记，以及一些杂谈</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/category/">Category</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/xxiieao">GitHub project</a>
+      <span class="sidebar-nav-item">Currently v0.1.0</span>
+    </nav>
+
+    <p>Theme by <a href="https://github.com/poole/hyde">Hyde</a></p>
+    <p>Powed by <a href="http://jekyllrb.com/">jekyll</a></p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">How to Draw Fractal</h1>
+  <span class="post-date">2015-10-29</span>
+  <span class="post-author">xxiieao</span>
+  <p>先介绍一下分形吧。百度上面关于分形的定义比较罗嗦，其实分形最重要的特征就是自相似，说白了就是局部放大之后会和整体非常相似。以前在网上看到过许多分形的图片，觉得非常漂亮，但是也一直没有动手画过。昨天看了一些关于分形生长的论文，里面提到反复迭代函数<script type="math/tex">f(z) = z^2 + c</script>就可以画出各种各样的分形。这个方程如此简单，让我觉得可以很轻松地在R中实现。不过很快我就犯了错误，看到论文的论述我的第一反应是<script type="math/tex">f(z)</script>的轨迹图是个分形。不过R上实践的结果根本不是分形。于是到matrix67的博客上看到了关于如何使用<script type="math/tex">f(z) = z^2 + c</script>画分形的解释。</p>
+
+<p>首先需要明确的第一点变量<script type="math/tex">z</script>是复数，当然<script type="math/tex">c</script>也是复数。</p>
+
+<p>其次构成分形的不是函数<script type="math/tex">f(z) = z^2 + c</script>的轨迹，而是<script type="math/tex">f(z)</script>的发散速度。<script type="math/tex">z</script>是不同数值时，即初始自变量不同<script type="math/tex">f(z)</script>发散的速度是不同的。而在计算模拟中，为了方便处理，一般定义为超过某个阈值需要的迭代计算次数。例如当<script type="math/tex">z = 0.6 + 0.5i</script>，<script type="math/tex">c = 1 + 0.5i</script>时，阈值为2时，需要迭代两次，那么这个2就作为<script type="math/tex">x = 0.6</script>和<script type="math/tex">y =0.5</script>这个点发散速度。对某个区域的点均进行计算再根据迭代次数进行计算就可以得到一张分形图。下面是R的代码，有兴趣的同学可以试一下</p>
+
+<p>下面是当<script type="math/tex">c = 0.45 - 0.1428i</script>时画出来的图片</p>
+
+<p><img src="/public/pics/fractal1.jpg" alt="picture" />
+<img src="/public/pics/fractal2.jpg" alt="picture" />
+<img src="/public/pics/fractal3.jpg" alt="picture" /></p>
+
+<p>下面附上R的代码</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="lineno"> 1</span> complex_matrix_int <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>interval<span class="p">,</span> x_start<span class="p">,</span> x_end<span class="p">,</span> y_start<span class="p">,</span> y_end<span class="p">){</span>
+<span class="lineno"> 2</span>   <span class="c1">#输入间隔，x轴和y轴的起始坐标</span>
+<span class="lineno"> 3</span>   <span class="c1">#输出一个由x坐标和y坐标构成的复数矩阵</span>
+<span class="lineno"> 4</span>   x_distance <span class="o">=</span> x_end <span class="o">-</span> x_start
+<span class="lineno"> 5</span>   y_distance <span class="o">=</span> y_end <span class="o">-</span> y_start
+<span class="lineno"> 6</span>   xaxis <span class="o">=</span> <span class="kp">seq</span><span class="p">(</span>x_start<span class="p">,</span> x_end<span class="p">,</span> interval<span class="p">)</span>
+<span class="lineno"> 7</span>   yaxis <span class="o">=</span> <span class="kp">seq</span><span class="p">(</span>y_start<span class="p">,</span> y_end<span class="p">,</span> interval<span class="p">)</span>
+<span class="lineno"> 8</span>   x_rep_times <span class="o">=</span> <span class="kp">length</span><span class="p">(</span>yaxis<span class="p">)</span>
+<span class="lineno"> 9</span>   y_rep_times <span class="o">=</span> <span class="kp">length</span><span class="p">(</span>xaxis<span class="p">)</span>
+<span class="lineno">10</span>   <span class="kt">matrix</span><span class="p">(</span><span class="kt">complex</span><span class="p">(</span>real <span class="o">=</span> <span class="kp">rep</span><span class="p">(</span>xaxis<span class="p">,</span> x_rep_times<span class="p">),</span>
+<span class="lineno">11</span>                  imaginary <span class="o">=</span> <span class="kp">rep</span><span class="p">(</span>yaxis<span class="p">,</span> each <span class="o">=</span> y_rep_times<span class="p">)),</span>
+<span class="lineno">12</span>                  x_rep_times<span class="p">,</span> y_rep_times<span class="p">,</span> byrow <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
+<span class="lineno">13</span> <span class="p">}</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span> iterator <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>complex_matrix<span class="p">,</span> constant<span class="p">){</span>
+<span class="lineno">16</span>   <span class="c1">#输入一个由x坐标和y坐标构成的复数矩阵和常数c</span>
+<span class="lineno">17</span>   <span class="c1">#输出一个与输入对应的矩阵，每个元素代表对应坐标超过2时的迭代次数</span>
+<span class="lineno">18</span>   res <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="kp">nrow</span><span class="p">(</span>complex_matrix<span class="p">),</span> <span class="kp">ncol</span><span class="p">(</span>complex_matrix<span class="p">))</span>
+<span class="lineno">19</span>   <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">){</span> <span class="c1">#因为有的点是收敛而非发散永远不会超过2因此设置迭代上限为100次</span>
+<span class="lineno">20</span>     res <span class="o">=</span> res <span class="o">+</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">abs</span><span class="p">(</span>complex_matrix<span class="p">)</span> <span class="o">&lt;=</span> <span class="m">2</span><span class="p">)</span>
+<span class="lineno">21</span>     complex_matrix <span class="o">=</span> complex_matrix<span class="o">^</span><span class="m">2</span> <span class="o">+</span> constant
+<span class="lineno">22</span>   <span class="p">}</span>
+<span class="lineno">23</span>   res
+<span class="lineno">24</span> <span class="p">}</span>
+<span class="lineno">25</span> 
+<span class="lineno">26</span> fractal_plot <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>interval <span class="o">=</span> <span class="m">0.005</span><span class="p">,</span>
+<span class="lineno">27</span>                         x_start <span class="o">=</span> <span class="m">-1.5</span><span class="p">,</span> x_end <span class="o">=</span> <span class="m">1.5</span><span class="p">,</span>
+<span class="lineno">28</span>                         y_start <span class="o">=</span> <span class="m">-1.5</span><span class="p">,</span> y_end <span class="o">=</span> <span class="m">1.5</span><span class="p">,</span>
+<span class="lineno">29</span>                         constant <span class="o">=</span> <span class="m">0.45-0.1428i</span><span class="p">){</span>
+<span class="lineno">30</span>   <span class="c1">#调用complex_matrix_int和iterator</span>
+<span class="lineno">31</span>   complex_matrix <span class="o">=</span> complex_matrix_int<span class="p">(</span>interval<span class="p">,</span> x_start<span class="p">,</span> x_end<span class="p">,</span> y_start<span class="p">,</span> y_end<span class="p">)</span>
+<span class="lineno">32</span>   iter_times_matrix <span class="o">=</span> iterator<span class="p">(</span>complex_matrix<span class="p">,</span> constant<span class="p">)</span>
+<span class="lineno">33</span>   <span class="c1">#并对迭代次数的矩阵进行染色</span>
+<span class="lineno">34</span>   filled.contour<span class="p">(</span>x <span class="o">=</span> <span class="kp">seq</span><span class="p">(</span>x_start<span class="p">,</span> x_end<span class="p">,</span> interval<span class="p">),</span>
+<span class="lineno">35</span>                  y <span class="o">=</span> <span class="kp">seq</span><span class="p">(</span>y_start<span class="p">,</span> y_end<span class="p">,</span> interval<span class="p">),</span>
+<span class="lineno">36</span>                  z <span class="o">=</span> <span class="kp">t</span><span class="p">(</span>iter_times_matrix<span class="p">),</span>
+<span class="lineno">37</span>                  col <span class="o">=</span> rainbow<span class="p">(</span><span class="m">121</span><span class="p">),</span>
+<span class="lineno">38</span>                  levels <span class="o">=</span> <span class="kp">pretty</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">100</span><span class="p">),</span> <span class="m">101</span><span class="p">))</span>
+<span class="lineno">39</span> <span class="p">}</span>
+<span class="lineno">40</span> 
+<span class="lineno">41</span> fractal_plot<span class="p">(</span><span class="m">0.005</span><span class="p">,</span> <span class="m">-1.5</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">-1.5</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">0.45-0.1428i</span><span class="p">)</span> <span class="c1">#第一张图</span>
+<span class="lineno">42</span> fractal_plot<span class="p">(</span><span class="m">0.001</span><span class="p">,</span> <span class="m">0.1</span><span class="p">,</span> <span class="m">0.6</span><span class="p">,</span> <span class="m">-0.6</span><span class="p">,</span> <span class="m">-0.1</span><span class="p">,</span> <span class="m">0.45-0.1428i</span><span class="p">)</span> <span class="c1">#第二张图</span>
+<span class="lineno">43</span> fractal_plot<span class="p">(</span><span class="m">0.00025</span><span class="p">,</span> <span class="m">0.3</span><span class="p">,</span> <span class="m">0.4</span><span class="p">,</span> <span class="m">-0.5</span><span class="p">,</span> <span class="m">-0.4</span><span class="p">,</span> <span class="m">0.45-0.1428i</span><span class="p">)</span> <span class="c1">#第三张图</span></code></pre></div>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2015/10/27/ID3/">
+            ID3
+            <small>2015-10-27</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2015/10/26/Principal-of-Apriori/">
+            Principal of Aprirori
+            <small>2015-10-26</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2015/10/26/Welcome-to-xxiieao/">
+            Welcome to xxiieao
+            <small>2015-10-26</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

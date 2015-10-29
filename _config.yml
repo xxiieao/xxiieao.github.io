@@ -1,7 +1,7 @@
 # Site settings
 title: Chorus
 email: xxiieao@gmail.com
-description: 这里主要是我学习算法的笔记，以及一些杂谈
+description: 这里主要是我学习的笔记，以及一些杂谈
 baseurl: # the subpath of your site, e.g. /blog/
 url: "http://xxiieao.github.io" # the base hostname & protocol for your site
 twitter_username: 
@@ -19,6 +19,7 @@ github:
 gems: [jekyll-mermaid]
 
 # Build settings
+highlighter: pygments
 markdown: kramdown
 # kramdown:
 #   input:  GFM
@@ -26,3 +27,5 @@ markdown: kramdown
 
 mermaid:
   src: 'http://cdn.bootcss.com/mermaid/0.5.4/mermaid.js'
+
+exclude: ['Rakefile']

@@ -23,8 +23,8 @@
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
   <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="public/apple-touch-icon-144-precomposed.png">
-                                 <link rel="shortcut icon" href="public/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="public/bass_big.png">
+                                 <link rel="shortcut icon" href="public/bass_small.ico">
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
@@ -45,7 +45,7 @@
           Chorus
         </a>
       </h1>
-      <p class="lead">这里主要是我学习算法的笔记，以及一些杂谈</p>
+      <p class="lead">这里主要是我学习的笔记，以及一些杂谈</p>
     </div>
 
     <nav class="sidebar-nav">
@@ -62,6 +62,12 @@
         
       
         
+          
+            <a class="sidebar-nav-item" href="/category/">Category</a>
+          
+        
+      
+        
       
         
           
@@ -73,6 +79,7 @@
     </nav>
 
     <p>Theme by <a href="https://github.com/poole/hyde">Hyde</a></p>
+    <p>Powed by <a href="http://jekyllrb.com/">jekyll</a></p>
   </div>
 </div>
 
@@ -80,7 +87,7 @@
     <div class="content container">
       <div class="post">
   <h1 class="post-title">ID3</h1>
-  <span class="post-date">27 Oct 2015</span>
+  <span class="post-date">2015-10-27</span>
   <span class="post-author">xxiieao</span>
   <p>决策树是数据挖掘中非常重要的组成部分，不过它并不属于机器学习的范畴。这里面的原因和主导决策数的基本思想——贪心算法有关系，在每一次分类都稳稳当当地走出最好一部的指导思想下，当然不需要学习。</p>
 
@@ -191,8 +198,6 @@
 
 <p>那么我们可以决定第一个分类变量选择的就是mobile_os。第二次分类的变量用同样的方法决定，不过在例子中由于只有两个变量，可以想象我们可以得到如下分类树。</p>
 
-<script src="http://cdn.bootcss.com/mermaid/0.5.4/mermaid.js"></script>
-
 <div class="mermaid">
 graph TD;
     start(user)--&gt;mobile_os{ios?};
@@ -202,7 +207,7 @@ graph TD;
     sex--&gt; |no| result3[50%purchase=no,50%purchase=yes];
 </div>
 
-<p>第一个mobile_os==ios的分支之所以没再继续按sex分类是因为该组的purchase都是yes，熵值为0没有必要再分。在实际应用中为了防止过度分类，常常会设定增益度阈值，低于该阈值则不再划分。</p>
+<p>第一个mobile_os=ios的分支之所以没再继续按sex分类是因为该组的purchase都是yes，熵值为0没有必要再分。在实际应用中为了防止过度分类，常常会设定增益度阈值，低于该阈值则不再划分。</p>
 
 </div>
 
@@ -212,9 +217,18 @@ graph TD;
     
       <li>
         <h3>
+          <a href="/2015/10/29/How-to-Draw-Fractal/">
+            How to Draw Fractal
+            <small>2015-10-29</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
           <a href="/2015/10/26/Principal-of-Apriori/">
             Principal of Aprirori
-            <small>26 Oct 2015</small>
+            <small>2015-10-26</small>
           </a>
         </h3>
       </li>
@@ -223,7 +237,7 @@ graph TD;
         <h3>
           <a href="/2015/10/26/Welcome-to-xxiieao/">
             Welcome to xxiieao
-            <small>26 Oct 2015</small>
+            <small>2015-10-26</small>
           </a>
         </h3>
       </li>
