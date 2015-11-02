@@ -21,8 +21,8 @@ author: xxiieao
 
 # Base Theory of Apriori
 
-- If one item-set is *FREQUENT*, whose subsets are all *FREQUENT*.
-- If an item-set is *INFREQUENT*, none of the item-sets contains that would be *Frequent*.
+- If one item-set is *FREQUENT*, all of its subsets are *FREQUENT*.
+- If an item-set is *INFREQUENT*, none of the item-sets contains it would be *Frequent*.
 
 ---
 

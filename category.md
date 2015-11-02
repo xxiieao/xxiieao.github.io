@@ -1,16 +1,10 @@
 ---
 layout: page
-title: Category
+title: ''
 permalink: /category/
 ---
 
-<div class="page-category">
 {% assign sortedcat = site.categories | sort %}
-{% for cat in sortedcat %}
-<a href="index.html#{{ cat[0] }}">{{ cat[0] }}</a>
-{% endfor %}
-</div>
-
 
 {% for cat in sortedcat %}
 <h1 class="category-name" id="{{cat[0]}}" name="{{cat[0]}}">{{cat[0]}}</h1>

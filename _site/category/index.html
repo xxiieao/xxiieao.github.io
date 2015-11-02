@@ -11,7 +11,7 @@
 
   <title>
     
-      Category &middot; Chorus
+       &middot; Chorus
     
   </title>
 
@@ -20,27 +20,29 @@
   <link rel="stylesheet" href="/public/css/syntax.css">
   <link rel="stylesheet" href="/public/css/hyde.css">
   <link rel="stylesheet" href="/public/css/mermaid.css">
+  <link rel="stylesheet" href="/public/css/sidebar-toggle.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
   <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="public/bass_big.png">
-                                 <link rel="shortcut icon" href="public/bass_small.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/bass_big.png">
+                                 <link rel="shortcut icon" href="/public/bass_small.ico">
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
 
-  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="/public/javascript/jquery-1.11.1.js"></script>
 </head>
 
 
   <body>
-
-    <div class="sidebar">
+    <input type='checkbox' id='sidebar-checkbox'> 
+    <label class='sidebar-toggle' for='sidebar-checkbox'></label>
+    <div class="sidebar" id = "siderbar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
       <h1>
-        <a href="">
+        <a href="/">
           Chorus
         </a>
       </h1>
@@ -62,7 +64,7 @@
       
         
           
-            <a class="sidebar-nav-item active" href="/category/">Category</a>
+            <a class="sidebar-nav-item active" href="/category/"></a>
           
         
       
@@ -74,29 +76,20 @@
       
 
       <a class="sidebar-nav-item" href="https://github.com/xxiieao">GitHub project</a>
-      <span class="sidebar-nav-item">Currently v0.1.0</span>
+      <span class="sidebar-nav-item">Currently v0.2.0</span>
     </nav>
 
-    <p>Theme by <a href="https://github.com/poole/hyde">Hyde</a></p>
-    <p>Powed by <a href="http://jekyllrb.com/">jekyll</a></p>
+    <p>Theme from <a href="https://github.com/poole/hyde">Hyde</a></p>
+    <p>Powered by <a href="http://jekyllrb.com/">jekyll</a></p>
   </div>
 </div>
 
 
+
     <div class="content container">
       <div class="page">
-  <h1 class="page-title">Category</h1>
-  <div class="page-category">
-
-
-<a href="index.html#algorithm">algorithm</a>
-
-<a href="index.html#math">math</a>
-
-<a href="index.html#other">other</a>
-
-</div>
-
+  <h1 class="page-title"></h1>
+  
 <h1 class="category-name" id="algorithm" name="algorithm">algorithm</h1>
 
 <div class="article">

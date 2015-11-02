@@ -11,7 +11,7 @@ permalink: /:year/:month/:day/:title/
 paginate: 20
 
 # Custom vars
-version: 0.1.0
+version: 0.2.0
 
 github:
   repo: https://github.com/xxiieao
