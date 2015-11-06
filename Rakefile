@@ -4,7 +4,7 @@ task :post, [:filename, :categores] do |t, args|
   new_file = File.new(path, "w")
   new_file << ["---",
   	           "layout: post",
-  	           "title:  \"#{args[:filename].replace("-", "")}\"",
+  	           "title:  \"#{args[:filename].gsub("-", "")}\"",
                "date: #{Time.now.strftime('%Y-%m-%d %H:%m:%S')}",
                "categories: \"#{args[:categores]}\"",
                "author: xxiieao",

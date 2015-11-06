@@ -5,9 +5,147 @@
     <description>这里主要是我学习的笔记，以及一些杂谈</description>
     <link>http://xxiieao.github.io/</link>
     <atom:link href="http://xxiieao.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 02 Nov 2015 19:17:26 +0800</pubDate>
-    <lastBuildDate>Mon, 02 Nov 2015 19:17:26 +0800</lastBuildDate>
+    <pubDate>Fri, 06 Nov 2015 18:45:45 +0800</pubDate>
+    <lastBuildDate>Fri, 06 Nov 2015 18:45:45 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Principal of Aprirori</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#overview&quot; id=&quot;markdown-toc-overview&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#base-theory-of-apriori&quot; id=&quot;markdown-toc-base-theory-of-apriori&quot;&gt;Base Theory of Apriori&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#steps-of-apriori&quot; id=&quot;markdown-toc-steps-of-apriori&quot;&gt;Steps of Apriori&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#step-1&quot; id=&quot;markdown-toc-step-1&quot;&gt;Step 1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#step-2&quot; id=&quot;markdown-toc-step-2&quot;&gt;Step 2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;overview&quot;&gt;Overview&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DataMining&lt;/li&gt;
+  &lt;li&gt;Frequent item-set&lt;/li&gt;
+  &lt;li&gt;Bottom up approach&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;base-theory-of-apriori&quot;&gt;Base Theory of Apriori&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;If one item-set is &lt;em&gt;FREQUENT&lt;/em&gt;, all of its subsets are &lt;em&gt;FREQUENT&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;If an item-set is &lt;em&gt;INFREQUENT&lt;/em&gt;, none of the item-sets contains it would be &lt;em&gt;Frequent&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;steps-of-apriori&quot;&gt;Steps of Apriori&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;step1 counting and filtering candidate&lt;/li&gt;
+  &lt;li&gt;step2 candidate generation&lt;/li&gt;
+  &lt;li&gt;step3 return to step1, unless no or only one candidate left&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;step-1&quot;&gt;Step 1&lt;/h1&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;order_id&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;item_name&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;b&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;c&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;b&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;e&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;f&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;counting&lt;/p&gt;
+
+  &lt;p&gt;b: 2, c: 1, e: 1, f: 1&lt;/p&gt;
+
+  &lt;p&gt;filted result&lt;/p&gt;
+
+  &lt;p&gt;b: 2&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;step-2&quot;&gt;Step 2&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Single item scenario&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;items from step 1&lt;/p&gt;
+
+  &lt;p&gt;a: 10, b: 5, c: 8, e: 7&lt;/p&gt;
+
+  &lt;p&gt;generate candidate from a, b, c, e&lt;/p&gt;
+
+  &lt;p&gt;[ab, ac, ae, bc, be, ce]&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Multi item scenario&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;items from step 1&lt;/p&gt;
+
+  &lt;p&gt;abc: 4, abd: 5, acd: 3&lt;/p&gt;
+
+  &lt;p&gt;generate candidate from abc, acd, ace&lt;/p&gt;
+
+  &lt;p&gt;[acde]&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Mon, 26 Oct 2015 04:16:22 +0800</pubDate>
+        <link>http://xxiieao.github.io/2015/10/26/Principal-of-Apriori/</link>
+        <guid isPermaLink="true">http://xxiieao.github.io/2015/10/26/Principal-of-Apriori/</guid>
+        
+        
+        <category>algorithm</category>
+        
+      </item>
+    
+      <item>
+        <title>Welcome to xxiieao</title>
+        <description>&lt;p&gt;值得纪念的第一步&lt;/p&gt;
+</description>
+        <pubDate>Mon, 26 Oct 2015 03:16:22 +0800</pubDate>
+        <link>http://xxiieao.github.io/2015/10/26/Welcome-to-xxiieao/</link>
+        <guid isPermaLink="true">http://xxiieao.github.io/2015/10/26/Welcome-to-xxiieao/</guid>
+        
+        
+        <category>other</category>
+        
+      </item>
     
       <item>
         <title>How to Draw Fractal</title>
@@ -69,9 +207,9 @@
 &lt;span class=&quot;lineno&quot;&gt;42&lt;/span&gt; fractal_plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.001&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-0.6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.45-0.1428i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#第二张图&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;43&lt;/span&gt; fractal_plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.00025&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-0.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.45-0.1428i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#第三张图&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
-        <pubDate>Thu, 29 Oct 2015 05:10:02 +0800</pubDate>
-        <link>http://xxiieao.github.io/2015/10/29/How-to-Draw-Fractal/</link>
-        <guid isPermaLink="true">http://xxiieao.github.io/2015/10/29/How-to-Draw-Fractal/</guid>
+        <pubDate>Mon, 06 Apr 2015 05:10:02 +0800</pubDate>
+        <link>http://xxiieao.github.io/2015/04/06/How-to-Draw-Fractal/</link>
+        <guid isPermaLink="true">http://xxiieao.github.io/2015/04/06/How-to-Draw-Fractal/</guid>
         
         
         <category>math</category>
@@ -202,9 +340,9 @@ graph TD;
 
 &lt;p&gt;第一个mobile_os=ios的分支之所以没再继续按sex分类是因为该组的purchase都是yes，熵值为0没有必要再分。在实际应用中为了防止过度分类，常常会设定增益度阈值，低于该阈值则不再划分。&lt;/p&gt;
 </description>
-        <pubDate>Tue, 27 Oct 2015 04:40:22 +0800</pubDate>
-        <link>http://xxiieao.github.io/2015/10/27/ID3/</link>
-        <guid isPermaLink="true">http://xxiieao.github.io/2015/10/27/ID3/</guid>
+        <pubDate>Sun, 21 Sep 2014 19:45:22 +0800</pubDate>
+        <link>http://xxiieao.github.io/2014/09/21/ID3/</link>
+        <guid isPermaLink="true">http://xxiieao.github.io/2014/09/21/ID3/</guid>
         
         
         <category>algorithm</category>
@@ -212,140 +350,35 @@ graph TD;
       </item>
     
       <item>
-        <title>Principal of Aprirori</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#overview&quot; id=&quot;markdown-toc-overview&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#base-theory-of-apriori&quot; id=&quot;markdown-toc-base-theory-of-apriori&quot;&gt;Base Theory of Apriori&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#steps-of-apriori&quot; id=&quot;markdown-toc-steps-of-apriori&quot;&gt;Steps of Apriori&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#step-1&quot; id=&quot;markdown-toc-step-1&quot;&gt;Step 1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#step-2&quot; id=&quot;markdown-toc-step-2&quot;&gt;Step 2&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+        <title>SVM</title>
+        <description>&lt;p&gt;SVM，全称support vector machine中文名字叫支持向量机。我刚接触时觉得很高大上，感觉和图灵机、冯诺依曼机一样。我接触SVM的时间非常短，在很长一段时间内只是知道有这样东西的存在，而对SVM的了解就仅限于百度百科里有一段资料——“支持向量机将向量映射到一个更高维的空间里，在这个空间里建立有一个最大间隔超平面。在分开数据的超平面的两边建有两个互相平行的超平面。”我对于这个描述完全是高大上和不明觉厉的节奏。实际上此机并非彼机，虽然名字中有个“机”字，但是支持向量机只是一种最优化算法，本质上和梯度下降算法、遗传算法等等是没有区别的。当SVM同样也属于机器学习的范畴。下面我们就走进科学看看SVM的本质。&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;首先来看看SVM能做什么？一句话概之，普通监督分类算法能做的，它也能做。&lt;/p&gt;
 
-&lt;h1 id=&quot;overview&quot;&gt;Overview&lt;/h1&gt;
+&lt;p&gt;那么普通监督分类算法能做的，为何要用SVM来做？同样一句话回答，因为它做得更好。这里我们用两张图来表示什么叫做更好：&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;DataMining&lt;/li&gt;
-  &lt;li&gt;Frequent item-set&lt;/li&gt;
-  &lt;li&gt;Bottom up approach&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/mw690/6daafd01gw1exrfoaasncj208b06jmxh.jpg&quot; alt=&quot;picture&quot; /&gt;&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;图1是普通监督分类算法可能会得出的结果，我们可以发现以现有数据来说，这条直线都很好进行了分类。这是因为在梯度下降的过程中，当两类数据被完全分开后，代价函数就不会再移动了，所以直线也就不会再移动了。显然这条直线并不是我们最想要的结果，SVM就能克服这个问题。&lt;/p&gt;
 
-&lt;h1 id=&quot;base-theory-of-apriori&quot;&gt;Base Theory of Apriori&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/mw690/6daafd01gw1exrfoapgorj208k06jwex.jpg&quot; alt=&quot;picture&quot; /&gt;&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;If one item-set is &lt;em&gt;FREQUENT&lt;/em&gt;, all of its subsets are &lt;em&gt;FREQUENT&lt;/em&gt;.&lt;/li&gt;
-  &lt;li&gt;If an item-set is &lt;em&gt;INFREQUENT&lt;/em&gt;, none of the item-sets contains that would be &lt;em&gt;Frequent&lt;/em&gt;.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;如图2所示SVM会把边界划分在距离两类数据距离最大的地方，因此有时候SVM也被称为大边际分类器（large margin classifier），不过这个名字已经暴露了SVM一部分的本质。&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;最后一个问题，为何SVM能分在这个地方？为啥SVM的名字里有向量一词？先看下面图3，抛开SVM里面复杂的核函数什么的，先看两条边界线，左边一条是普通监督分类算法的结果，右边一条是SVM的结果。先将边界线的参数作为向量（绿虚线）画出来（这个向量是与边界线垂直的，例如左边的边界线是&lt;script type=&quot;math/tex&quot;&gt;X_1-X_2=0&lt;/script&gt;，边界线参数&lt;script type=&quot;math/tex&quot;&gt;X_1&lt;/script&gt;和&lt;script type=&quot;math/tex&quot;&gt;X_2&lt;/script&gt;的系数即[1,1]，而右边的边界线是&lt;script type=&quot;math/tex&quot;&gt;0*X_1+X_2=0&lt;/script&gt;即[1,0]）。&lt;/p&gt;
 
-&lt;h1 id=&quot;steps-of-apriori&quot;&gt;Steps of Apriori&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/mw690/6daafd01gw1exrfoazhtnj20h606c3yz.jpg&quot; alt=&quot;picture&quot; /&gt;&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;step1 counting and filtering candidate&lt;/li&gt;
-  &lt;li&gt;step2 candidate generation&lt;/li&gt;
-  &lt;li&gt;step3 return to step1, unless no or only one candidate left&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;在讨论SVM的神奇效果之前，先说明一下如何利用边界线进行区分红蓝点。例如在左图R1有两个坐标[&lt;script type=&quot;math/tex&quot;&gt;X_1R_1&lt;/script&gt;,&lt;script type=&quot;math/tex&quot;&gt;X_2R_1&lt;/script&gt;]，那么他的预测值&lt;script type=&quot;math/tex&quot;&gt;Y&lt;/script&gt;就等于[&lt;script type=&quot;math/tex&quot;&gt;X_1R_1&lt;/script&gt;,&lt;script type=&quot;math/tex&quot;&gt;X_2R_1&lt;/script&gt;]对边界线的参数[1,1]做点乘法再求和，而这个过程实际上等于R1点在绿虚线上的投影（红实线）长度乘以绿虚线本身的长度。这其实就是向量乘积的变换过程，也是SVM里向量一词的由来。&lt;/p&gt;
 
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;step-1&quot;&gt;Step 1&lt;/h1&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;order_id&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;item_name&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;b&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;c&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;b&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;e&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;f&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;counting&lt;/p&gt;
-
-  &lt;p&gt;b: 2, c: 1, e: 1, f: 1&lt;/p&gt;
-
-  &lt;p&gt;filted result&lt;/p&gt;
-
-  &lt;p&gt;b: 2&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;step-2&quot;&gt;Step 2&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Single item scenario&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;items from step 1&lt;/p&gt;
-
-  &lt;p&gt;a: 10, b: 5, c: 8, e: 7&lt;/p&gt;
-
-  &lt;p&gt;generate candidate from a, b, c, e&lt;/p&gt;
-
-  &lt;p&gt;[ab, ac, ae, bc, be, ce]&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Multi item scenario&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;items from step 1&lt;/p&gt;
-
-  &lt;p&gt;abc: 4, abd: 5, acd: 3&lt;/p&gt;
-
-  &lt;p&gt;generate candidate from abc, acd, ace&lt;/p&gt;
-
-  &lt;p&gt;[acde]&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;总结上面一点其实就是说红蓝点的区分是以每个点在边界线的垂直线上的投影长度与边界线参数向量的长度的乘积（即&lt;script type=&quot;math/tex&quot;&gt;Y&lt;/script&gt;）来决定的。相对与普通的监督分类算法，SVM做了一个要求边界线参数向量长度要尽量短。可以想到对于同样的Y值来说，其实就是要求各点投影长度的总和要尽量长（例如&lt;script type=&quot;math/tex&quot;&gt;R_1&lt;/script&gt;点在左图的投影显然短于右图的投影，左图边界线参数向量的长度为&lt;script type=&quot;math/tex&quot;&gt;sqrt(2)&lt;/script&gt;，而右图边界线参数向量的长度仅为1）。&lt;/p&gt;
 </description>
-        <pubDate>Mon, 26 Oct 2015 04:16:22 +0800</pubDate>
-        <link>http://xxiieao.github.io/2015/10/26/Principal-of-Apriori/</link>
-        <guid isPermaLink="true">http://xxiieao.github.io/2015/10/26/Principal-of-Apriori/</guid>
+        <pubDate>Sun, 24 Aug 2014 21:03:35 +0800</pubDate>
+        <link>http://xxiieao.github.io/2014/08/24/SVM/</link>
+        <guid isPermaLink="true">http://xxiieao.github.io/2014/08/24/SVM/</guid>
         
         
         <category>algorithm</category>
-        
-      </item>
-    
-      <item>
-        <title>Welcome to xxiieao</title>
-        <description>&lt;p&gt;值得纪念的第一步&lt;/p&gt;
-</description>
-        <pubDate>Mon, 26 Oct 2015 03:16:22 +0800</pubDate>
-        <link>http://xxiieao.github.io/2015/10/26/Welcome-to-xxiieao/</link>
-        <guid isPermaLink="true">http://xxiieao.github.io/2015/10/26/Welcome-to-xxiieao/</guid>
-        
-        
-        <category>other</category>
         
       </item>
     

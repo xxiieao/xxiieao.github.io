@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      SVM &middot; Chorus
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/mermaid.css">
+  <link rel="stylesheet" href="/public/css/sidebar-toggle.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/bass_big.png">
+                                 <link rel="shortcut icon" href="/public/bass_small.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="/public/javascript/jquery-1.11.1.js"></script>
+</head>
+
+
+  <body>
+    <input type='checkbox' id='sidebar-checkbox'> 
+    <label class='sidebar-toggle' for='sidebar-checkbox'></label>
+    <div class="sidebar" id = "siderbar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Chorus
+        </a>
+      </h1>
+      <p class="lead">这里主要是我学习的笔记，以及一些杂谈</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/category/">Category</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/xxiieao">GitHub project</a>
+      <span class="sidebar-nav-item">Currently v0.2.0</span>
+    </nav>
+
+    <p>Theme from <a href="https://github.com/poole/hyde">Hyde</a></p>
+    <p>Powered by <a href="http://jekyllrb.com/">jekyll</a></p>
+  </div>
+</div>
+
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">SVM</h1>
+  <span class="post-date">2014-08-24</span>
+  <span class="post-author">xxiieao</span>
+  <p>SVM，全称support vector machine中文名字叫支持向量机。我刚接触时觉得很高大上，感觉和图灵机、冯诺依曼机一样。我接触SVM的时间非常短，在很长一段时间内只是知道有这样东西的存在，而对SVM的了解就仅限于百度百科里有一段资料——“支持向量机将向量映射到一个更高维的空间里，在这个空间里建立有一个最大间隔超平面。在分开数据的超平面的两边建有两个互相平行的超平面。”我对于这个描述完全是高大上和不明觉厉的节奏。实际上此机并非彼机，虽然名字中有个“机”字，但是支持向量机只是一种最优化算法，本质上和梯度下降算法、遗传算法等等是没有区别的。当SVM同样也属于机器学习的范畴。下面我们就走进科学看看SVM的本质。</p>
+
+<p>首先来看看SVM能做什么？一句话概之，普通监督分类算法能做的，它也能做。</p>
+
+<p>那么普通监督分类算法能做的，为何要用SVM来做？同样一句话回答，因为它做得更好。这里我们用两张图来表示什么叫做更好：</p>
+
+<p><img src="http://ww1.sinaimg.cn/mw690/6daafd01gw1exrfoaasncj208b06jmxh.jpg" alt="picture" /></p>
+
+<p>图1是普通监督分类算法可能会得出的结果，我们可以发现以现有数据来说，这条直线都很好进行了分类。这是因为在梯度下降的过程中，当两类数据被完全分开后，代价函数就不会再移动了，所以直线也就不会再移动了。显然这条直线并不是我们最想要的结果，SVM就能克服这个问题。</p>
+
+<p><img src="http://ww4.sinaimg.cn/mw690/6daafd01gw1exrfoapgorj208k06jwex.jpg" alt="picture" /></p>
+
+<p>如图2所示SVM会把边界划分在距离两类数据距离最大的地方，因此有时候SVM也被称为大边际分类器（large margin classifier），不过这个名字已经暴露了SVM一部分的本质。</p>
+
+<p>最后一个问题，为何SVM能分在这个地方？为啥SVM的名字里有向量一词？先看下面图3，抛开SVM里面复杂的核函数什么的，先看两条边界线，左边一条是普通监督分类算法的结果，右边一条是SVM的结果。先将边界线的参数作为向量（绿虚线）画出来（这个向量是与边界线垂直的，例如左边的边界线是<script type="math/tex">X_1-X_2=0</script>，边界线参数<script type="math/tex">X_1</script>和<script type="math/tex">X_2</script>的系数即[1,1]，而右边的边界线是<script type="math/tex">0*X_1+X_2=0</script>即[1,0]）。</p>
+
+<p><img src="http://ww2.sinaimg.cn/mw690/6daafd01gw1exrfoazhtnj20h606c3yz.jpg" alt="picture" /></p>
+
+<p>在讨论SVM的神奇效果之前，先说明一下如何利用边界线进行区分红蓝点。例如在左图R1有两个坐标[<script type="math/tex">X_1R_1</script>,<script type="math/tex">X_2R_1</script>]，那么他的预测值<script type="math/tex">Y</script>就等于[<script type="math/tex">X_1R_1</script>,<script type="math/tex">X_2R_1</script>]对边界线的参数[1,1]做点乘法再求和，而这个过程实际上等于R1点在绿虚线上的投影（红实线）长度乘以绿虚线本身的长度。这其实就是向量乘积的变换过程，也是SVM里向量一词的由来。</p>
+
+<p>总结上面一点其实就是说红蓝点的区分是以每个点在边界线的垂直线上的投影长度与边界线参数向量的长度的乘积（即<script type="math/tex">Y</script>）来决定的。相对与普通的监督分类算法，SVM做了一个要求边界线参数向量长度要尽量短。可以想到对于同样的Y值来说，其实就是要求各点投影长度的总和要尽量长（例如<script type="math/tex">R_1</script>点在左图的投影显然短于右图的投影，左图边界线参数向量的长度为<script type="math/tex">sqrt(2)</script>，而右图边界线参数向量的长度仅为1）。</p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2015/10/26/Principal-of-Apriori/">
+            Principal of Aprirori
+            <small>2015-10-26</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2015/10/26/Welcome-to-xxiieao/">
+            Welcome to xxiieao
+            <small>2015-10-26</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2015/04/06/How-to-Draw-Fractal/">
+            How to Draw Fractal
+            <small>2015-04-06</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

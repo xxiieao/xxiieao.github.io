@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How to Draw Fractal"
-date: 2015-10-28 21:10:02
+date: 2015-04-05 21:10:02
 categories: "math"
 author: xxiieao
 ---
