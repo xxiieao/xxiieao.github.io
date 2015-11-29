@@ -72,7 +72,9 @@ Möbius是一位动物学者，主要研究对象是牡蛎。（he was first to 
 在1900年前后，无论是植物还是动物生态学都进入了一个比较快的发展时期。这段时间的两种学科的分裂情况仍在继续。1913年Journal of Ecology创刊。Tansley是它的创始人之一，并且在1916-38间担任了它的编辑。在1932年，Elton担任了刚创刊的Journal Animal of Ecology的第一任编辑，这一任也是将近20年。有趣的是在1927-39年间，Tansley还和Elton同在Oxford为同事。我想两位大师都没有藐视对方的意思，只是当时的学术环境如此。在当时的确有植物学者认为生态研究中动物是可以忽略的。其中甚至包括Clements这样的大家。
 
 ###Plant
+
 ####Henry Chandler Cowles（考尔斯）（1869-1939）
+
 Cowles受到Warming的影响非常的大，甚至学习了丹麦语以便阅读Plantesamfund。正是因为受到这个书的影响，Cowles对密歇根湖沙丘的植被演替进行了研究。他因此获得博士学位。Cowles是研究演替的先驱。顺便提一下Shelford（谢尔福德）是他的学生。
 
 ####Frederic Edward Clements（克莱门茨）（1874-1945）
@@ -84,7 +86,9 @@ Clements通过对美国西部植被的观察，提出顶级群落学说。这个
 这个时期的植物生态学研究主要方面为群落的演替和结构，并由此衍生出了一种整体思维，不过还是一种将动物看做可有可无的整体。
 
 ###Animal
+
 ####Hardy-Weinberg equilibrium（哈蒂－魏伯格平衡）（1908，1909）
+
 Godfrey Harold Hardy（1877-1947）和Wilhelm Weinberg （1862 – 1937），前者是数学家，后者是内科医生。这个平衡是种群遗传学上的一个里程碑。
 
 ####Volterra-Lotka equations（沃特拉－洛特卡方程）（1925，1926）
