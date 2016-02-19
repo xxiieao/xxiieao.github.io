@@ -19,7 +19,7 @@ github:
 gems: [jekyll-mermaid]
 
 # Build settings
-rouge: pygments
+highlighter: rouge
 markdown: kramdown
 # kramdown:
 #   input:  GFM
