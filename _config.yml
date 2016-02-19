@@ -4,7 +4,7 @@ email: xxiieao@gmail.com
 description: 这里主要是我学习的笔记，以及一些杂谈
 baseurl: # the subpath of your site, e.g. /blog/
 url: "http://xxiieao.github.io" # the base hostname & protocol for your site
-twitter_username: 
+twitter_username:
 github_username:  xxiieao
 permalink: /:year/:month/:day/:title/
 
@@ -19,7 +19,7 @@ github:
 gems: [jekyll-mermaid]
 
 # Build settings
-highlighter: pygments
+rouge: pygments
 markdown: kramdown
 # kramdown:
 #   input:  GFM
