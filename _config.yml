@@ -16,7 +16,7 @@ version: 0.2.0
 github:
   repo: https://github.com/xxiieao
 
-gems: [jekyll-mermaid]
+gems: [jekyll-mermaid, jekyll-paginate]
 
 # Build settings
 highlighter: rouge

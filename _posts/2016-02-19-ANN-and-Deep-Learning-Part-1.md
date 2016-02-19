@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "ANN and Deep Learning Part 1"
-date: 2016-02-19 22:02:11
+date: 2016-02-19 22:02:11 +0800
 categories: "algorithm"
 author: xxiieao
 ---
