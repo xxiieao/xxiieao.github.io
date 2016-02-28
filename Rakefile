@@ -1,6 +1,6 @@
 desc "create new post"
 task :post, [:filename, :categores, :datetime] do |t, args|
-  date = args[:datetime] || Time.now.strftime('%Y-%m-%d %H:%m:%S')
+  date = args[:datetime] || Time.now.strftime('%Y-%m-%d %H:%m:%S +0800')
   path = File.dirname(__FILE__) + "/_posts/#{date[0..9]}-#{args[:filename].gsub(" ","-")}.md"
   new_file = File.new(path, "w")
   new_file << ["---",
