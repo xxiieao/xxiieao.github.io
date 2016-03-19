@@ -2,7 +2,7 @@
 layout: post
 title:  "ANN and Deep Learning Part 3"
 date: 2016-03-04 22:03:39 +0800
-categories: ""
+categories: "algorithm"
 author: xxiieao
 ---
 
