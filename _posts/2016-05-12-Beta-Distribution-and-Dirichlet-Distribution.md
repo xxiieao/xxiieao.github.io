@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Beta Distribution and Dirichlet Distribution"
-date: 2016-04-23 11:04:02 +0800
+date: 2016-05-12 21:04:02 +0800
 categories: "math"
 author: xxiieao
 ---
