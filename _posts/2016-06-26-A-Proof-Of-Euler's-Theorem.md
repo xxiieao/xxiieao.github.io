@@ -2,7 +2,7 @@
 layout: post
 title:  "A Proof Of Euler's Theorem"
 date: 2016-06-26 14:06:54 +0800
-categories: ""
+categories: "math"
 author: xxiieao
 ---
 
