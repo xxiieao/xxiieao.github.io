@@ -2,7 +2,7 @@
 layout: post
 title:  "Humboldt Project"
 date: 2017-04-09 11:04:32 +0800
-categories: "projects"
+categories: "other"
 author: xxiieao
 ---
 

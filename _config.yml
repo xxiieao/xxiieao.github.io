@@ -1,12 +1,12 @@
 # Site settings
-title: Chorus
+title: xxiieao
 email: xxiieao@gmail.com
-description: 这里主要是我学习的笔记，以及一些杂谈
+# description: 这里主要是我学习的笔记，以及一些杂谈
 baseurl: # the subpath of your site, e.g. /blog/
 url: "http://xxiieao.github.io" # the base hostname & protocol for your site
 twitter_username:
 github_username:  xxiieao
-permalink: /:year/:month/:day/:title/
+permalink: /:year-:month-:day/:title/
 
 paginate: 20
 
@@ -16,14 +16,16 @@ version: 0.2.0
 github:
   repo: https://github.com/xxiieao
 
-gems: [jekyll-mermaid, jekyll-paginate]
+gems: [jekyll-mermaid, jekyll-paginate, jekyll-toc]
 
 # Build settings
 highlighter: rouge
 markdown: kramdown
+
 # kramdown:
 #   input:  GFM
 #   use_coderay: true
+#   parse_block_html: true
 
 mermaid:
   src: 'http://cdn.bootcss.com/mermaid/0.5.4/mermaid.js'
